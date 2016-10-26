@@ -4,7 +4,7 @@ const PHONE_PRICE = 700;
 const ACCESSORY_PRICE = 20;
 const SPENDING_THRESHOLD = 10000;
 
-function totalPrice() {
+function attemptPurchase() {
   var bankBalance = parseInt(prompt("How much money is in your account?"));
   var phonePriceAfterTax = priceAfterTax(PHONE_PRICE);
   var purchasePrice = 0;
@@ -21,14 +21,22 @@ function totalPrice() {
     return price + (price * TAX_RATE);
   }
 
+  if (bankBalance < phonePriceAfterTax) {
+    console.log("I'm sorry, you can't affort this purchase.");
+  }
+
   while (bankBalance > phonePriceAfterTax) {
     bankBalance -= phonePriceAfterTax;
     purchasePrice += phonePriceAfterTax;
 
     if (bankBalance > SPENDING_THRESHOLD) {
-      bankBalance -= 9;
-      purchasePrice += 9;
+      bankBalance -= ACCESSORY_PRICE;
+      purchasePrice += ACCESSORY_PRICE;
+    }
+
+    if (bankBalance < phonePriceAfterTax) {
+      console.log("Your total is: " + formatPrice(purchasePrice));
     }
   }
-  console.log(formatPrice(purchasePrice));
+  // console.log(formatPrice(purchasePrice));
 }
