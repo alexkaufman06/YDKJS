@@ -38,5 +38,4 @@ function attemptPurchase() {
       console.log("Your total is: " + formatPrice(purchasePrice));
     }
   }
-  // console.log(formatPrice(purchasePrice));
 }
